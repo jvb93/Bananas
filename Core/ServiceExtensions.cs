@@ -4,6 +4,8 @@ using Core.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
+using Serilog.Exceptions;
+using Serilog.Formatting.Json;
 
 namespace Core
 {
@@ -25,7 +27,8 @@ namespace Core
         {
             Log.Logger = new LoggerConfiguration()
                 .Enrich.FromLogContext()
-                .WriteTo.File($"logs/log-{DateTime.Now.ToString("MM-dd-yyyy-HH-mm-ss")}")
+                .Enrich.WithExceptionDetails()
+                .WriteTo.File(new JsonFormatter(), "logs/logs.txt", rollingInterval: RollingInterval.Day, fileSizeLimitBytes: 10000000, rollOnFileSizeLimit: true)
                 .CreateLogger();
             
             serviceCollection

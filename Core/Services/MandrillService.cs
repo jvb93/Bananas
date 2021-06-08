@@ -7,6 +7,7 @@ using Mandrill;
 using Mandrill.Models;
 using Mandrill.Requests.Messages;
 using Mandrill.Requests.Templates;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Core.Services
@@ -14,9 +15,11 @@ namespace Core.Services
     public class MandrillService : IMandrillService
     {
         private readonly IMandrillApi _mandrill;
-
-        public MandrillService(IOptions<AppSettings> settings)
+        private readonly ILogger<MandrillService> _logger;
+        
+        public MandrillService(IOptions<AppSettings> settings, ILogger<MandrillService> logger)
         {
+            _logger = logger;
             _mandrill = new MandrillApi(settings.Value.ApiKey);
         }
 
@@ -25,11 +28,12 @@ namespace Core.Services
             var listTemplatesRequest = new ListTemplatesRequest();
             try
             {
+                _logger.LogInformation("Fetching Mandrill templates");
                 return await _mandrill.ListTemplates(listTemplatesRequest);
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                _logger.LogError(e, "Error fetching templates");
                 return new List<TemplateInfo>();
             }
         }

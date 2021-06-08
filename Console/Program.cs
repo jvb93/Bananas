@@ -13,7 +13,7 @@ namespace Console
         {
             BuildServiceProvider();
             
-            IServiceScope scope = _serviceProvider.CreateScope();
+            var scope = _serviceProvider.CreateScope();
             var mandrillService = scope.ServiceProvider.GetRequiredService<IMandrillService>();
 
             var templates = await mandrillService.GetTemplatesAsync();
@@ -22,6 +22,7 @@ namespace Console
             {
                 System.Console.WriteLine(template.Name);
             }
+            
             DisposeServiceProvider();
         }
 
