@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Mandrill.Models;
+using Mandrill.Model;
 
 namespace Core.Services
 {
     public interface IMandrillService
     {
-        Task<List<TemplateInfo>> GetTemplatesAsync();
+        Task<List<MandrillTemplateInfo>> GetTemplatesAsync();
         Task SendMessageAsync(string recipient, string subject, string fromAddress, string fromName, string templateName, Dictionary<string, string> templateFields);
     }
 }
