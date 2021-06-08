@@ -17,7 +17,7 @@ namespace Core.Services
 
         public MandrillService(IOptions<AppSettings> settings)
         {
-            _mandrill = new MandrillApi(settings.Value.MandrillApiKey);
+            _mandrill = new MandrillApi(settings.Value.ApiKey);
         }
 
         public async Task<List<TemplateInfo>> GetTemplatesAsync()

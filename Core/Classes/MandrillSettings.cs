@@ -2,6 +2,6 @@ namespace Core.Classes
 {
     public class AppSettings
     {
-        public string MandrillApiKey { get; set; }
+        public string ApiKey { get; set; }
     }
 }
