@@ -80,6 +80,7 @@ namespace Console
                     };
                     await mandrillService.SendMessageAsync(records[x].Address, subject, fromAddress, fromName,
                         selectedTemplate, templateFields);
+                    Thread.Sleep(250);
                 }
             }
             System.Console.WriteLine("Done. Press any key to continue...");
