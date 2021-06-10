@@ -1,14 +1,16 @@
-﻿using System;
+﻿using App.Core.Services;
+using Core;
+using Core.Classes;
+using CsvHelper;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Core;
-using Core.Services;
-using CsvHelper;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Console
 {
@@ -20,8 +22,8 @@ namespace Console
             BuildServiceProvider();
             
             var scope = _serviceProvider.CreateScope();
-            var mandrillService = scope.ServiceProvider.GetRequiredService<IMandrillService>();
-
+            var mandrillServiceFactory = scope.ServiceProvider.GetRequiredService<IMandrillServiceFactory>();
+            var mandrillService = mandrillServiceFactory.Build(scope.ServiceProvider.GetRequiredService<IOptions<MandrillSettings>>().Value.ApiKey);
             var templates = await mandrillService.GetTemplatesAsync();
             System.Console.WriteLine("Choose a template:");
             foreach (var template in templates)
@@ -95,7 +97,7 @@ namespace Console
             services
                 .AddConfiguration()
                 .AddStructuredLogging()
-                .AddMandrill();
+                .AddMandrillServiceFactory();
             
             _serviceProvider = services.BuildServiceProvider(true);
         }

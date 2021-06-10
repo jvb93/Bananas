@@ -16,10 +16,16 @@ namespace Core.Services
         private readonly MandrillApi _mandrill;
         private readonly ILogger<MandrillService> _logger;
         
-        public MandrillService(IOptions<AppSettings> settings, ILogger<MandrillService> logger)
+        public MandrillService(IOptions<MandrillSettings> settings, ILogger<MandrillService> logger)
         {
             _logger = logger;
             _mandrill = new MandrillApi(settings.Value.ApiKey);
+        }
+
+        public MandrillService(string apiKey, ILogger<MandrillService> logger)
+        {
+            _logger = logger;
+            _mandrill = new MandrillApi(apiKey);
         }
 
         public async Task<List<MandrillTemplateInfo>> GetTemplatesAsync()

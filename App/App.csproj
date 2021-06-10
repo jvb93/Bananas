@@ -145,6 +145,7 @@
     <Compile Include="Services\ActivationService.cs" />
     <Compile Include="Activation\DefaultActivationHandler.cs" />
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\MandrillApiKeyService.cs" />
     <Compile Include="Services\ThemeSelectorService.cs" />
     <Compile Include="ViewModels\TemplatesViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
@@ -226,9 +227,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />
-    <None Include="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="App_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

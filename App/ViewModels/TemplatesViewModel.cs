@@ -3,9 +3,12 @@ using Mandrill.Model;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using App.Core.Services;
+using App.Services;
 
 namespace App.ViewModels
 {
@@ -22,25 +25,28 @@ namespace App.ViewModels
 
         public ObservableCollection<MandrillTemplateInfo> Templates { get; private set; } = new ObservableCollection<MandrillTemplateInfo>();
 
-        public TemplatesViewModel(IMandrillService mandrillService)
+        public TemplatesViewModel(IMandrillServiceFactory mandrillServiceFactory)
         {
-            _mandrillService = mandrillService;
+            _mandrillService = mandrillServiceFactory.Build(MandrillApiKeyService.ApiKey);
         }
 
         public async Task LoadDataAsync(ListDetailsViewState viewState)
         {
             Templates.Clear();
-
-            var data = await _mandrillService.GetTemplatesAsync();
-            foreach (var item in data)
+            if(_mandrillService != null)
             {
-                Templates.Add(item);
-            }
+                var data = await _mandrillService.GetTemplatesAsync();
+                foreach (var item in data)
+                {
+                    Templates.Add(item);
+                }
 
-            if (viewState == ListDetailsViewState.Both)
-            {
-                Selected = Templates.First();
+                if (viewState == ListDetailsViewState.Both)
+                {
+                    Selected = Templates.First();
+                }
             }
+           
         }
     }
 }

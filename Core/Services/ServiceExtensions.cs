@@ -1,4 +1,5 @@
 using System;
+using App.Core.Services;
 using Core.Classes;
 using Core.Services;
 using Microsoft.Extensions.Configuration;
@@ -19,7 +20,7 @@ namespace Core
 
             serviceCollection.AddSingleton<IConfigurationRoot>(configuration);
 
-            serviceCollection.Configure<AppSettings>(opt => configuration.GetSection("Mandrill").Bind(opt));
+            serviceCollection.Configure<MandrillSettings>(opt => configuration.GetSection("Mandrill").Bind(opt));
             
             return serviceCollection;
         }
@@ -36,9 +37,9 @@ namespace Core
             
             return serviceCollection;
         }
-        public static IServiceCollection AddMandrill(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddMandrillServiceFactory(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddSingleton<IMandrillService, MandrillService>();
+            serviceCollection.AddSingleton<IMandrillServiceFactory, MandrillServiceFactory>();
             return serviceCollection;
         }
     }

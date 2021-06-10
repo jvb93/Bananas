@@ -17,12 +17,23 @@ namespace App.ViewModels
     public class SettingsViewModel : ObservableObject
     {
         private ElementTheme _elementTheme = ThemeSelectorService.Theme;
+        private string _mandrillApiKey = MandrillApiKeyService.ApiKey;
 
         public ElementTheme ElementTheme
         {
             get { return _elementTheme; }
 
             set { SetProperty(ref _elementTheme, value); }
+        }
+
+        public string MandrillApiKey
+        {
+            get { return _mandrillApiKey; }
+
+            set
+            {
+                SetProperty(ref _mandrillApiKey, value);
+            }
         }
 
         private string _versionDescription;
@@ -51,6 +62,25 @@ namespace App.ViewModels
                 }
 
                 return _switchThemeCommand;
+            }
+        }
+
+        private ICommand _setMandrillApiKeyCommand;
+
+        public ICommand SetMandrillApiKeyCommand
+        {
+            get
+            {
+                if (_setMandrillApiKeyCommand == null)
+                {
+                    _setMandrillApiKeyCommand = new RelayCommand<string>(
+                        async (param) =>
+                        {
+                            await MandrillApiKeyService.SetApiKeyAsync(MandrillApiKey);
+                        });
+                }
+
+                return _setMandrillApiKeyCommand;
             }
         }
 

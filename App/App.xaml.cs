@@ -63,9 +63,8 @@ namespace App
             var serviceCollection = new ServiceCollection();
 
             serviceCollection
-                .AddConfiguration()
                 .AddStructuredLogging()
-                .AddMandrill();
+                .AddMandrillServiceFactory();
 
             return serviceCollection.BuildServiceProvider();
         }
