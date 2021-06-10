@@ -23,13 +23,12 @@ namespace App.Services
 
         private static async Task<string> LoadApiKeyFromSettingsAsync()
         {
-            return await ApplicationData.Current.LocalSettings.ReadAsync<string>(SettingsKey);
-
+            return await ApplicationData.Current.LocalFolder.ReadAsync<string>(SettingsKey);
         }
 
         private static async Task SaveApiKeyInSettingsAsync(string apiKey)
         {
-            await ApplicationData.Current.LocalSettings.SaveAsync(SettingsKey, apiKey);
+            await ApplicationData.Current.LocalFolder.SaveAsync(SettingsKey, apiKey);
         }
     }
 }

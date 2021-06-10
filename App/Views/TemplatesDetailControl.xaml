@@ -15,9 +15,16 @@
         IsTabStop="True"
         VerticalScrollMode="Enabled">
         <StackPanel HorizontalAlignment="Left">
-            <StackPanel Name="block" Padding="0,15,0,0">
-                <TextBlock Style="{StaticResource DetailSubTitleStyle}" Text="Template" />
+            <StackPanel Name="basic" Padding="0,15,0,0">
+                <TextBlock Style="{StaticResource PageTitleStyle}" Text="Template" />
                 <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind ListMenuItem.Name, Mode=OneWay}" />
+            </StackPanel>
+            <StackPanel Name="preview" Padding="0,15,0,0">
+
+                <TextBlock Style="{StaticResource DetailSubTitleStyle}" Text="Preview" />
+                <Border Background="{ThemeResource SystemControlForegroundBaseLowBrush}">
+                    <TextBlock Style="{StaticResource CodeStyle}" Text="{x:Bind ListMenuItem.PublishText, Mode=OneWay}" />
+                </Border>
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
