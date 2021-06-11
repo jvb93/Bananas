@@ -32,12 +32,13 @@ namespace Core.Services
         {
             try
             {
-                _logger.LogInformation("Fetching Mandrill templates");
-                return (await _mandrill.Templates.ListAsync()).ToList();
+               // _logger.LogInformation("Fetching Mandrill templates");
+               var templateEnumerable = await _mandrill.Templates.ListAsync();
+               return templateEnumerable.ToList();
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Error fetching templates");
+                //_logger.LogError(e, "Error fetching templates");
                 return new List<MandrillTemplateInfo>();
             }
         }

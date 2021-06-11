@@ -19,6 +19,7 @@ namespace App.Views
 
         private async void ListDetailPage_Loaded(object sender, RoutedEventArgs e)
         {
+            await ViewModel.InitializeAsync();
             await ViewModel.LoadDataAsync(ListDetailsViewControl.ViewState);
         }
     }
