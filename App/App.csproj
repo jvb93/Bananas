@@ -144,8 +144,9 @@
     <Compile Include="Helpers\SettingsStorageExtensions.cs" />
     <Compile Include="Services\ActivationService.cs" />
     <Compile Include="Activation\DefaultActivationHandler.cs" />
+    <Compile Include="Services\ILocalFolderSettingsService.cs" />
+    <Compile Include="Services\LocalFolderSettingsService.cs" />
     <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Services\MandrillApiKeyService.cs" />
     <Compile Include="Services\ThemeSelectorService.cs" />
     <Compile Include="ViewModels\TemplatesViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />

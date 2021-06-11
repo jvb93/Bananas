@@ -1,8 +1,7 @@
 ﻿using App.ViewModels;
-using Core.Services;
+using Microsoft.Extensions.DependencyInjection;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace App.Views
 {
@@ -14,7 +13,7 @@ namespace App.Views
         {
             InitializeComponent();
             var container = ((App)App.Current).Container;
-            ViewModel = ActivatorUtilities.GetServiceOrCreateInstance(container, typeof(TemplatesViewModel)) as TemplatesViewModel;
+            ViewModel = container.GetRequiredService<TemplatesViewModel>();
             Loaded += ListDetailPage_Loaded;
         }
 

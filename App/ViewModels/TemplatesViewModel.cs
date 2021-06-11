@@ -14,7 +14,9 @@ namespace App.ViewModels
 {
     public class TemplatesViewModel : ObservableObject
     {
-        private readonly IMandrillService _mandrillService;
+        private IMandrillService _mandrillService;
+        private readonly IMandrillServiceFactory _mandrillServiceFactory;
+        private readonly ILocalFolderSettingsService _settingsService;
         private MandrillTemplateInfo _selected;
 
         public MandrillTemplateInfo Selected
@@ -25,9 +27,10 @@ namespace App.ViewModels
 
         public ObservableCollection<MandrillTemplateInfo> Templates { get; private set; } = new ObservableCollection<MandrillTemplateInfo>();
 
-        public TemplatesViewModel(IMandrillServiceFactory mandrillServiceFactory)
+        public TemplatesViewModel(IMandrillServiceFactory mandrillServiceFactory, ILocalFolderSettingsService settingsService)
         {
-            _mandrillService = mandrillServiceFactory.Build(MandrillApiKeyService.ApiKey);
+            _mandrillServiceFactory = mandrillServiceFactory;
+            _settingsService = settingsService;
         }
 
         public async Task LoadDataAsync(ListDetailsViewState viewState)
@@ -47,6 +50,13 @@ namespace App.ViewModels
                 }
             }
            
+        }
+
+        public async Task InitializeAsync()
+        {
+            var mandrillApiKey = await _settingsService.GetSettingAsync<string>(SettingsViewModel.MandrillApiKeySettingsKey);
+            _mandrillService = _mandrillServiceFactory.Build(mandrillApiKey);
+            
         }
     }
 }

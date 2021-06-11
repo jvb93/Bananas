@@ -63,7 +63,6 @@ namespace App.Services
         private async Task InitializeAsync()
         {
             await ThemeSelectorService.InitializeAsync().ConfigureAwait(false);
-            await MandrillApiKeyService.InitializeAsync().ConfigureAwait(false);
         }
 
         private async Task HandleActivationAsync(object activationArgs)

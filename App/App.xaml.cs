@@ -4,6 +4,7 @@ using App.Services;
 
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
+using App.ViewModels;
 using Core;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -65,6 +66,10 @@ namespace App
             serviceCollection
                 .AddStructuredLogging()
                 .AddMandrillServiceFactory();
+
+            serviceCollection.AddTransient<SettingsViewModel>();
+            serviceCollection.AddTransient<TemplatesViewModel>();
+            serviceCollection.AddSingleton<ILocalFolderSettingsService, LocalFolderSettingsService>();
 
             return serviceCollection.BuildServiceProvider();
         }

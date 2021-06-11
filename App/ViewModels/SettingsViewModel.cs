@@ -17,7 +17,10 @@ namespace App.ViewModels
     public class SettingsViewModel : ObservableObject
     {
         private ElementTheme _elementTheme = ThemeSelectorService.Theme;
-        private string _mandrillApiKey = MandrillApiKeyService.ApiKey;
+        public static readonly string MandrillApiKeySettingsKey = "MandrillApiKey";
+        private string _mandrillApiKey;
+
+        private readonly ILocalFolderSettingsService _settingsService;
 
         public ElementTheme ElementTheme
         {
@@ -76,7 +79,7 @@ namespace App.ViewModels
                     _setMandrillApiKeyCommand = new RelayCommand<string>(
                         async (param) =>
                         {
-                            await MandrillApiKeyService.SetApiKeyAsync(MandrillApiKey);
+                            await _settingsService.SaveSettingAsync(MandrillApiKeySettingsKey, MandrillApiKey);
                         });
                 }
 
@@ -84,14 +87,15 @@ namespace App.ViewModels
             }
         }
 
-        public SettingsViewModel()
+        public SettingsViewModel(ILocalFolderSettingsService settingsService)
         {
+            _settingsService = settingsService;
         }
 
         public async Task InitializeAsync()
         {
             VersionDescription = GetVersionDescription();
-            await Task.CompletedTask;
+            MandrillApiKey = await _settingsService.GetSettingAsync<string>(MandrillApiKeySettingsKey);
         }
 
         private string GetVersionDescription()
