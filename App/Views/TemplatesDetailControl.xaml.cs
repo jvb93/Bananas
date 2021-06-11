@@ -1,6 +1,9 @@
-﻿using Mandrill.Model;
+﻿using System;
+using Windows.UI.WindowManagement;
+using Mandrill.Model;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Hosting;
 
 namespace App.Views
 {
@@ -23,6 +26,18 @@ namespace App.Views
         {
             var control = d as TemplatesDetailControl;
             control.ForegroundElement.ChangeView(0, 0, 1);
+        }
+
+        private async void ComposeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var composeEmailWindow = await AppWindow.TryCreateAsync();
+            var composeEmailContentFrame = new Frame();
+            composeEmailContentFrame.Navigate(typeof(ComposeEmailPage));
+            ElementCompositionPreview.SetAppWindowContent(composeEmailWindow, composeEmailContentFrame);
+
+            var composeEmailPage = composeEmailContentFrame.Content as ComposeEmailPage;
+            composeEmailPage.ViewModel.Template = ListMenuItem;
+            await composeEmailWindow.TryShowAsync();
         }
     }
 }

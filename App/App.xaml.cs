@@ -69,6 +69,7 @@ namespace App
 
             serviceCollection.AddTransient<SettingsViewModel>();
             serviceCollection.AddTransient<TemplatesViewModel>();
+            serviceCollection.AddTransient<ComposeEmailViewModel>();
             serviceCollection.AddSingleton<ILocalFolderSettingsService, LocalFolderSettingsService>();
 
             return serviceCollection.BuildServiceProvider();

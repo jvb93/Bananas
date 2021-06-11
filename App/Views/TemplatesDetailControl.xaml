@@ -20,12 +20,18 @@
                 <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind ListMenuItem.Name, Mode=OneWay}" />
             </StackPanel>
             <StackPanel Name="preview" Padding="0,15,0,0">
-
                 <TextBlock Style="{StaticResource DetailSubTitleStyle}" Text="Preview" />
                 <Border Background="{ThemeResource SystemControlForegroundBaseLowBrush}">
                     <TextBlock Style="{StaticResource CodeStyle}" Text="{x:Bind ListMenuItem.PublishText, Mode=OneWay}" />
                 </Border>
+                <Button
+                    Name="ComposeButton"
+                    Margin="0,15,0,0"
+                    Background="Yellow"
+                    Content="Compose"
+                    Foreground="Black" Click="ComposeButton_Click" />
             </StackPanel>
+
         </StackPanel>
     </ScrollViewer>
 </UserControl>
