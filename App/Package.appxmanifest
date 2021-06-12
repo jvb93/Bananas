@@ -8,15 +8,15 @@
   IgnorableNamespaces="uap mp genTemplate">
 
   <Identity
-    Name="12D41AC1-D287-41C7-B902-5E0074CE340F"
-    Publisher="CN=Justin"
-    Version="1.0.0.0" />
+    Name="2106JustinVanBibber.BananasforMandrill"
+    Publisher="CN=B01554C5-824B-4A47-A8CC-2AE1F3DA3794"
+    Version="1.0.1.0" />
 
-  <mp:PhoneIdentity PhoneProductId="12D41AC1-D287-41C7-B902-5E0074CE340F" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="53986414-7155-4bd5-ae37-5a63f126268f" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>App</DisplayName>
-    <PublisherDisplayName>Justin</PublisherDisplayName>
+    <DisplayName>Bananas for Mandrill</DisplayName>
+    <PublisherDisplayName>Justin Van Bibber</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -33,13 +33,15 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="App.App">
       <uap:VisualElements
-        DisplayName="ms-resource:AppDisplayName"
+        DisplayName="Bananas for Mandrill"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="ms-resource:AppDescription"
+        Description="A mandrill mailer app"
         BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:InitialRotationPreference>
+          <uap:Rotation Preference="landscape"/></uap:InitialRotationPreference>
       </uap:VisualElements>
 
       <Extensions>

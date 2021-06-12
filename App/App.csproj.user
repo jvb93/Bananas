@@ -1,6 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
+    <Source>C:\Users\Justin\Downloads\PngItem_1012834.png</Source>
+    <SmallTileSource>C:\Users\Justin\Downloads\PngItem_1012834.png</SmallTileSource>
+    <MediumTileSource>C:\Users\Justin\Downloads\PngItem_1012834.png</MediumTileSource>
+    <WideTileSource>C:\Users\Justin\Downloads\PngItem_1012834.png</WideTileSource>
+    <LargeTileSource>C:\Users\Justin\Downloads\PngItem_1012834.png</LargeTileSource>
+    <AppIconSource>C:\Users\Justin\Downloads\PngItem_1012834.png</AppIconSource>
+    <SplashScreenSource>C:\Users\Justin\Downloads\PngItem_1012834.png</SplashScreenSource>
+    <PackageLogoSource>C:\Users\Justin\Downloads\PngItem_1012834.png</PackageLogoSource>
+    <UapAppxPackageBuildMode>StoreAndSideload</UapAppxPackageBuildMode>
+    <AppxShowAllApps>False</AppxShowAllApps>
+    <AppxBuildConfigurationSelection>x64</AppxBuildConfigurationSelection>
+    <PackageOptionalProjectsInIdeBuilds>True</PackageOptionalProjectsInIdeBuilds>
   </PropertyGroup>
 </Project>
