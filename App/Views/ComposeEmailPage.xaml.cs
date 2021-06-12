@@ -1,20 +1,13 @@
 ﻿using System;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Net.Mail;
-using System.Threading.Tasks;
-using Windows.Storage;
-using Windows.UI.Xaml;
 using App.ViewModels;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Data;
-using App.Core.Models;
-using CsvHelper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Toolkit.Uwp.UI.Controls;
+using System.Collections.ObjectModel;
+using System.Data;
+using System.Linq;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,6 +19,7 @@ namespace App.Views
     public sealed partial class ComposeEmailPage : Page
     {
         public ComposeEmailViewModel ViewModel { get; private set; }
+        public int RowCount { get; private set; }
 
         public ComposeEmailPage()
         {
@@ -47,7 +41,7 @@ namespace App.Views
             FillDataGrid(dt, MergeFieldsGrid);
         }
 
-        public static void FillDataGrid(DataTable table, DataGrid grid)
+        private void FillDataGrid(DataTable table, DataGrid grid)
         {
             grid.Columns.Clear();
             grid.AutoGenerateColumns = false;
@@ -66,9 +60,43 @@ namespace App.Views
                 collection.Add(row.ItemArray);
             }
 
+            RowCount = table.Rows.Count;
+
             grid.ItemsSource = collection;
+
+            var headerNames = new ObservableCollection<string>();
+            foreach (DataColumn tableColumn in table.Columns)
+            {
+                headerNames.Add(tableColumn.ColumnName);
+            }
+
+            EmailAddressColumnSelector.ItemsSource = headerNames;
+
+            grid.Visibility = Visibility.Visible;
+            EmailAddressColumnSelector.Visibility = Visibility.Visible;
         }
 
 
+        private void EmailAddressColumnSelector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ViewModel.RecipientAddressesDatatableColumnName = e.AddedItems[0].ToString();
+        }
+
+        private async void SendButton_Click(object sender, RoutedEventArgs e)
+        {
+            ContentDialog locationPromptDialog = new ContentDialog
+            {
+                Title = "Send Emails?",
+                Content = $"You're about to send {RowCount} emails. Does everything look correct?",
+                CloseButtonText = "Cancel",
+                PrimaryButtonText = "Send"
+            };
+
+            ContentDialogResult result = await locationPromptDialog.ShowAsync();
+            if (result == ContentDialogResult.Primary)
+            {
+                await ViewModel.SendEmailsAsync();
+            }
+        }
     }
 }

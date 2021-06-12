@@ -1,13 +1,10 @@
-﻿using App.Core.Models;
-using App.Core.Services;
+﻿using App.Core.Services;
 using App.Services;
 using Core.Services;
-using CsvHelper;
 using Mandrill.Model;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Globalization;
@@ -15,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
+using CsvHelper;
 
 namespace App.ViewModels
 {
@@ -29,7 +27,8 @@ namespace App.ViewModels
         public string FromName { get; set; }
         public string FromAddress { get; set; }
         public string Subject { get; set; }
-
+        public string RecipientAddressesDatatableColumnName { get; set; }
+        private DataTable MergeTags { get; set; }
         public ComposeEmailViewModel(IMandrillServiceFactory mandrillServiceFactory, ILocalFolderSettingsService settingsService)
         {
             _mandrillServiceFactory = mandrillServiceFactory;
@@ -60,9 +59,9 @@ namespace App.ViewModels
             {
                 using (var dr = new CsvDataReader(csv))
                 {
-                    var dt = new DataTable();
-                    dt.Load(dr);
-                    return dt;
+                    MergeTags = new DataTable();
+                    MergeTags.Load(dr);
+                    return MergeTags;
                 }
             }
         }
@@ -88,6 +87,24 @@ namespace App.ViewModels
             }
             return dictionary;
 
+        }
+
+        public async Task SendEmailsAsync()
+        {
+            if (_mandrillService != null)
+            {
+                for (int row = 0; row < MergeTags.Rows.Count; row++)
+                {
+                    var rowMergeTagDictionary = new Dictionary<string, string>();
+                    for (int col = 0; col < MergeTags.Columns.Count; col++)
+                    {
+                        rowMergeTagDictionary.Add(MergeTags.Columns[col].ColumnName, MergeTags.Rows[row].ItemArray[col].ToString());
+
+                    }
+                    await _mandrillService.SendMessageAsync(rowMergeTagDictionary[RecipientAddressesDatatableColumnName], Subject, FromAddress, FromName, Template.Name, rowMergeTagDictionary);
+                    await Task.Delay(250);
+                }
+            }
         }
     }
 }

@@ -18,7 +18,15 @@ namespace App.Services
 
         public async Task SaveSettingAsync<T>(string key, T value) where T : class
         {
-            await ApplicationData.Current.LocalFolder.SaveAsync(key, JsonSerializer.Serialize(value));
+            if (value is string)
+            {
+                await ApplicationData.Current.LocalFolder.SaveAsync(key, value);
+            }
+            else
+            {
+                await ApplicationData.Current.LocalFolder.SaveAsync(key, JsonSerializer.Serialize(value));
+            }
+            
             _localCache.AddOrUpdate(key, value, (k, oldValue) => value);
 
         }

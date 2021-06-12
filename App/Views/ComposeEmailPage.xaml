@@ -8,7 +8,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     mc:Ignorable="d">
-
     <ScrollViewer
         Name="ForegroundElement"
         Padding="{StaticResource DetailPageMargin}"
@@ -17,22 +16,46 @@
         IsTabStop="True"
         VerticalScrollMode="Enabled">
         <StackPanel HorizontalAlignment="Left">
-            <StackPanel Name="basic" Padding="0,15,0,0">
+            <StackPanel Padding="0,15,0,0">
                 <TextBlock Style="{StaticResource PageTitleStyle}" Text="Compose Messages" />
                 <TextBlock Style="{StaticResource DetailBodyBaseMediumStyle}" Text="{x:Bind ViewModel.Template.Name, Mode=OneWay}" />
             </StackPanel>
-            <StackPanel Name="preview" Padding="0,15,0,0">
+            <StackPanel Padding="0,15,0,0">
                 <TextBox Header="Subject" Text="{x:Bind ViewModel.Subject, Mode=TwoWay}" />
                 <TextBox Header="From Address" Text="{x:Bind ViewModel.FromAddress, Mode=TwoWay}" />
                 <TextBox Header="From Name" Text="{x:Bind ViewModel.FromName, Mode=TwoWay}" />
-                <Button
-                    Name="ChooseCsvButton"
-                    Margin="0,15,0,0"
-                    Background="Yellow"
-                    Click="ChooseCsvButton_Click"
-                    Content="Choose CSV"
-                    Foreground="Black" />
-                <controls:DataGrid Name="MergeFieldsGrid" />
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Name="ChooseCsvButton"
+                        Margin="0,15,0,0"
+                        Background="Yellow"
+                        Click="ChooseCsvButton_Click"
+                        Content="Choose CSV"
+                        Foreground="Black"
+                        Grid.Row="0"
+                        Grid.Column="0"/>
+
+                    <Button
+                        Name="SendButton"
+                        Margin="0,15,0,0"
+                        Background="Yellow"
+                        Click="SendButton_Click"
+                        Content="Send"
+                        Foreground="Black"
+                        Grid.Row="0"
+                        Grid.Column="1"/>
+                </Grid>
+                
+
+
+                <ComboBox Margin="0,15,0,0" Header="Select Column with Addresses" Name="EmailAddressColumnSelector" SelectionChanged="EmailAddressColumnSelector_OnSelectionChanged" Visibility="Collapsed"/>
+
+                <controls:DataGrid Margin="0,15,0,0" Name="MergeFieldsGrid" Visibility="Collapsed" />
             </StackPanel>
         </StackPanel>
     </ScrollViewer>
