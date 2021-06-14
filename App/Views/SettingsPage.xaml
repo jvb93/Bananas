@@ -53,10 +53,13 @@
             </StackPanel>
 
             <StackPanel Margin="{StaticResource SmallTopBottomMargin}">
-                <TextBlock Text="Mandrill API Key" />
+                <TextBlock x:Uid="MandrillAPIKeyTextBlock" />
                 <StackPanel Margin="{StaticResource XSmallTopMargin}">
                     <TextBox Text="{x:Bind ViewModel.MandrillApiKey, Mode=TwoWay}" />
-                    <Button Command="{x:Bind ViewModel.SetMandrillApiKeyCommand}" Content="Save" />
+                    <Button
+                        x:Uid="Settings_SaveButton"
+                        Margin="{StaticResource XSmallTopMargin}"
+                        Command="{x:Bind ViewModel.SetMandrillApiKeyCommand}" />
                 </StackPanel>
             </StackPanel>
 
@@ -68,8 +71,6 @@
                     x:Uid="Settings_AboutDescription"
                     Margin="{StaticResource XSmallTopMargin}"
                     Style="{ThemeResource BodyTextBlockStyle}" />
-
-                <HyperlinkButton x:Uid="Settings_PrivacyTermsLink" Margin="{StaticResource XSmallTopMargin}" />
             </StackPanel>
         </StackPanel>
     </Grid>

@@ -118,11 +118,11 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppDisplayName" xml:space="preserve">
-    <value>App</value>
+    <value>Bananas for Mandrill</value>
     <comment>Application display name</comment>
   </data>
   <data name="AppDescription" xml:space="preserve">
-    <value>App</value>
+    <value>A Transactional Email Sender</value>
     <comment>Application description</comment>
   </data>
   <data name="ListDetail_NoSelection.Text" xml:space="preserve">
@@ -158,7 +158,7 @@
     <comment>About this application title for Settings</comment>
   </data>
   <data name="Settings_AboutDescription.Text" xml:space="preserve">
-    <value>Settings page placeholder text.  Your app description goes here.</value>
+    <value>Bananas for Mandrill is a toolkit for sending transactional emails using Mandrill.</value>
     <comment>About this application description for Settings</comment>
   </data>
   <data name="Settings_PrivacyTermsLink.Content" xml:space="preserve">
@@ -172,5 +172,35 @@
   <data name="Settings_Personalization.Text" xml:space="preserve">
     <value>Personalization</value>
     <comment>Personalization text for Settings</comment>
+  </data>
+  <data name="MandrillAPIKeyTextBlock.Text" xml:space="preserve">
+    <value>Mandrill API Key</value>
+  </data>
+  <data name="FromNameTextBox.Header" xml:space="preserve">
+    <value>From Name</value>
+  </data>
+  <data name="FromAddressTextBox.Header" xml:space="preserve">
+    <value>From Address</value>
+  </data>
+  <data name="SubjectTextBox.Header" xml:space="preserve">
+    <value>Subject</value>
+  </data>
+  <data name="ComposeMessagesTextBlock.Text" xml:space="preserve">
+    <value>Compose Messages</value>
+  </data>
+  <data name="PreviewTextBlock.Text" xml:space="preserve">
+    <value>Preview</value>
+  </data>
+  <data name="TemplateTextBlock.Text" xml:space="preserve">
+    <value>Template</value>
+  </data>
+  <data name="Settings_SaveButton.Content" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="ChooseCsvButton.Content" xml:space="preserve">
+    <value>Choose CSV</value>
+  </data>
+  <data name="SendButton.Content" xml:space="preserve">
+    <value>Send</value>
   </data>
 </root>
