@@ -96,7 +96,6 @@ namespace Console
             
             services
                 .AddConfiguration()
-                .AddStructuredLogging()
                 .AddMandrillServiceFactory();
             
             _serviceProvider = services.BuildServiceProvider(true);

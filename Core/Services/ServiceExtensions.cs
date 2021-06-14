@@ -24,19 +24,7 @@ namespace Core
             
             return serviceCollection;
         }
-        public static IServiceCollection AddStructuredLogging(this IServiceCollection serviceCollection)
-        {
-            Log.Logger = new LoggerConfiguration()
-                .Enrich.FromLogContext()
-                .Enrich.WithExceptionDetails()
-                .WriteTo.File(new JsonFormatter(), "logs/logs.txt", rollingInterval: RollingInterval.Day, fileSizeLimitBytes: 10000000, rollOnFileSizeLimit: true)
-                .CreateLogger();
-            
-            serviceCollection
-                .AddLogging(builder => builder.AddSerilog());
-            
-            return serviceCollection;
-        }
+       
         public static IServiceCollection AddMandrillServiceFactory(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<IMandrillServiceFactory, MandrillServiceFactory>();

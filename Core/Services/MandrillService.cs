@@ -14,17 +14,14 @@ namespace Core.Services
     public class MandrillService : IMandrillService
     {
         private readonly MandrillApi _mandrill;
-        private readonly ILogger<MandrillService> _logger;
         
-        public MandrillService(IOptions<MandrillSettings> settings, ILogger<MandrillService> logger)
+        public MandrillService(IOptions<MandrillSettings> settings)
         {
-            _logger = logger;
             _mandrill = new MandrillApi(settings.Value.ApiKey);
         }
 
-        public MandrillService(string apiKey, ILogger<MandrillService> logger)
-        {
-            _logger = logger;
+        public MandrillService(string apiKey)
+        { 
             _mandrill = new MandrillApi(apiKey);
         }
 
@@ -32,13 +29,11 @@ namespace Core.Services
         {
             try
             {
-                _logger.LogInformation("Fetching Mandrill templates");
                var templateEnumerable = await _mandrill.Templates.ListAsync();
                return templateEnumerable.ToList();
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Error fetching templates");
                 return new List<MandrillTemplateInfo>();
             }
         }

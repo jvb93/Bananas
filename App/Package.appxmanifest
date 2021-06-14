@@ -10,9 +10,9 @@
   <Identity
     Name="2106JustinVanBibber.BananasforMandrill"
     Publisher="CN=B01554C5-824B-4A47-A8CC-2AE1F3DA3794"
-    Version="1.0.1.0" />
+    Version="1.0.8.0" />
 
-  <mp:PhoneIdentity PhoneProductId="53986414-7155-4bd5-ae37-5a63f126268f" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="79538b68-11e2-4c36-bbfc-78364302d31a" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>Bananas for Mandrill</DisplayName>

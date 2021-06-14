@@ -64,7 +64,6 @@ namespace App
             var serviceCollection = new ServiceCollection();
 
             serviceCollection
-                .AddStructuredLogging()
                 .AddMandrillServiceFactory();
 
             serviceCollection.AddTransient<SettingsViewModel>();
