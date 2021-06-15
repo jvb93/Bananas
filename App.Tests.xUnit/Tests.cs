@@ -1,8 +1,8 @@
-﻿using Core.Services;
+﻿using App.Core.Services;
 using Moq;
 using Xunit;
 
-namespace App.Tests.XUnit
+namespace App.Tests.xUnit
 {
     // TODO WTS: Add appropriate tests
     public class Tests

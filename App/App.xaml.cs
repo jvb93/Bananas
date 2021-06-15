@@ -4,8 +4,8 @@ using App.Services;
 
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
+using App.Core.Services;
 using App.ViewModels;
-using Core;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace App
@@ -70,6 +70,7 @@ namespace App
             serviceCollection.AddTransient<TemplatesViewModel>();
             serviceCollection.AddTransient<ComposeEmailViewModel>();
             serviceCollection.AddSingleton<ILocalFolderSettingsService, LocalFolderSettingsService>();
+            serviceCollection.AddSingleton<IMandrillTaskService, MandrillTaskService>();
 
             return serviceCollection.BuildServiceProvider();
         }

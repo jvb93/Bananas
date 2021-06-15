@@ -1,14 +1,8 @@
-using System;
-using App.Core.Services;
-using Core.Classes;
-using Core.Services;
+using App.Core.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Serilog;
-using Serilog.Exceptions;
-using Serilog.Formatting.Json;
 
-namespace Core
+namespace App.Core.Services
 {
     public static class ServiceExtensions
     {

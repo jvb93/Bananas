@@ -1,5 +1,4 @@
-﻿using Core.Services;
-using Mandrill.Model;
+﻿using Mandrill.Model;
 using Microsoft.Toolkit.Mvvm.ComponentModel;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using System;

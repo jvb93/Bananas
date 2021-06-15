@@ -10,6 +10,7 @@ using Microsoft.Toolkit.Mvvm.Input;
 
 using Windows.ApplicationModel;
 using Windows.UI.Xaml;
+using App.Core.Services;
 
 namespace App.ViewModels
 {

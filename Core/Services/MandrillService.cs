@@ -2,14 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.Classes;
+using App.Core.Models;
 using Mandrill;
 using Mandrill.Model;
-
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Core.Services
+namespace App.Core.Services
 {
     public class MandrillService : IMandrillService
     {
@@ -38,7 +36,7 @@ namespace Core.Services
             }
         }
 
-        public async Task SendMessageAsync(string recipient, string subject, string fromAddress, string fromName, string templateName, Dictionary<string, string> templateFields)
+        public async Task<string> SendMessageAsync(string recipient, string subject, string fromAddress, string fromName, string templateName, Dictionary<string, string> templateFields)
         {
             var message = new MandrillMessage();
             message.FromEmail = fromAddress;
@@ -51,7 +49,18 @@ namespace Core.Services
                 message.AddGlobalMergeVars(templateField.Key, templateField.Value);
 
             }
-            var result = await _mandrill.Messages.SendTemplateAsync(message, templateName);
+
+            try
+            {
+                var result = await _mandrill.Messages.SendTemplateAsync(message, templateName);
+
+                return result.First().RejectReason;
+            }
+            catch (Exception e)
+            {
+                return "Internal Error";
+            }
+           
         }
     }
 }

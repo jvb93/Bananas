@@ -1,6 +1,4 @@
 ﻿using App.Core.Services;
-using Core;
-using Core.Classes;
 using CsvHelper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -11,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using App.Core.Models;
 
 namespace Console
 {

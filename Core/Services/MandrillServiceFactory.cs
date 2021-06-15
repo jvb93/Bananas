@@ -1,6 +1,4 @@
-﻿using Core.Services;
-
-namespace App.Core.Services
+﻿namespace App.Core.Services
 {
     public class MandrillServiceFactory : IMandrillServiceFactory
     {

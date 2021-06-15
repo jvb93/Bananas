@@ -1,4 +1,4 @@
-namespace Core.Classes
+namespace App.Core.Models
 {
     public class MandrillSettings
     {
