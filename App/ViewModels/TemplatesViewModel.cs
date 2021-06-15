@@ -43,7 +43,7 @@ namespace App.ViewModels
                     Templates.Add(item);
                 }
 
-                if (viewState == ListDetailsViewState.Both)
+                if (viewState == ListDetailsViewState.Both && Templates?.Any() == true)
                 {
                     Selected = Templates.First();
                 }
