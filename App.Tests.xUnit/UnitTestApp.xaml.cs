@@ -11,7 +11,6 @@ namespace App.Tests.xUnit
     {
         public App()
         {
-            InitializeComponent();
             Suspending += OnSuspending;
         }
 
