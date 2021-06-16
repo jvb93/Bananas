@@ -22,11 +22,11 @@
                 <StackPanel Margin="{StaticResource XSmallTopMargin}">
                     <TextBox Text="{x:Bind ViewModel.MandrillApiKey, Mode=TwoWay}" />
                     <Button
+                        Name="SaveMandrillAPIKeyButton"
                         x:Uid="Settings_SaveButton"
                         Margin="{StaticResource XSmallTopMargin}"
                         Background="{StaticResource SystemControlBackgroundAccentBrush}"
-                        Command="{x:Bind ViewModel.SetMandrillApiKeyCommand}"
-                        Foreground="Black" />
+                        Foreground="Black" Click="SaveMandrillAPIKeyButton_Click" />
                 </StackPanel>
             </StackPanel>
 

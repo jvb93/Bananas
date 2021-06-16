@@ -42,6 +42,7 @@
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                 <TextBlock
                     x:Uid="ListDetail_NoSelection"
+                    Padding="{StaticResource DetailPageMargin}"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Style="{StaticResource SubtitleTextBlockStyle}"

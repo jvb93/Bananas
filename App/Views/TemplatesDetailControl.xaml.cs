@@ -98,7 +98,7 @@ namespace App.Views
 
         private async void SendButton_Click(object sender, RoutedEventArgs e)
         {
-            ContentDialog locationPromptDialog = new ContentDialog
+            var locationPromptDialog = new ContentDialog
             {
                 Title = "Send Emails?",
                 Content = $"You're about to send {RowCount} emails. Does everything look correct?",

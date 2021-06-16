@@ -1,10 +1,9 @@
-﻿using System;
-
+﻿
+using System;
 using App.ViewModels;
-
+using Microsoft.Extensions.DependencyInjection;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace App.Views
 {
@@ -23,6 +22,20 @@ namespace App.Views
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             await ViewModel.InitializeAsync();
+        }
+
+        private async void SaveMandrillAPIKeyButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            await ViewModel.SetMandrillApiKeyAsync();
+
+            var mandrillKeySavedDialog = new ContentDialog()
+            {
+                Title = "Success!",
+                Content = "Mandrill API key saved.",
+                CloseButtonText = "Ok"
+            };
+
+            await mandrillKeySavedDialog.ShowAsync();
         }
     }
 }

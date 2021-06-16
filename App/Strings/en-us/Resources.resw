@@ -126,7 +126,8 @@
     <comment>Application description</comment>
   </data>
   <data name="ListDetail_NoSelection.Text" xml:space="preserve">
-    <value>Select a template from the list.</value>
+    <value>Select a template from the list.
+No Templates? Make sure your API key is correctly set in Settings.</value>
     <comment>No selection text for ListDetail</comment>
   </data>
   <data name="ListDetail.ListHeader" xml:space="preserve">

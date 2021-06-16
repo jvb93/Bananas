@@ -69,23 +69,9 @@ namespace App.ViewModels
             }
         }
 
-        private ICommand _setMandrillApiKeyCommand;
-
-        public ICommand SetMandrillApiKeyCommand
+        public async Task SetMandrillApiKeyAsync()
         {
-            get
-            {
-                if (_setMandrillApiKeyCommand == null)
-                {
-                    _setMandrillApiKeyCommand = new RelayCommand<string>(
-                        async (param) =>
-                        {
-                            await _settingsService.SaveSettingAsync(MandrillApiKeySettingsKey, MandrillApiKey);
-                        });
-                }
-
-                return _setMandrillApiKeyCommand;
-            }
+            await _settingsService.SaveSettingAsync(MandrillApiKeySettingsKey, MandrillApiKey);
         }
 
         public SettingsViewModel(ILocalFolderSettingsService settingsService)
