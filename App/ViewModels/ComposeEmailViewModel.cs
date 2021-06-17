@@ -13,6 +13,8 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace App.ViewModels
 {
@@ -28,7 +30,7 @@ namespace App.ViewModels
         public string FromAddress { get; set; }
         public string Subject { get; set; }
         public string RecipientAddressesDatatableColumnName { get; set; }
-        private DataTable MergeTags { get; set; }
+        private DataTable MergeTags { get; set; } = new DataTable();
 
         public ComposeEmailViewModel(IMandrillServiceFactory mandrillServiceFactory, ILocalFolderSettingsService settingsService)
         {
@@ -77,7 +79,7 @@ namespace App.ViewModels
 
         public async Task SendEmailsAsync()
         {
-            if (_mandrillService != null)
+            if (_mandrillService != null )
             {
                 var taskBatch = new TaskBatch();
                 for (int row = 0; row < MergeTags.Rows.Count; row++)
@@ -100,6 +102,17 @@ namespace App.ViewModels
 
                     await _mandrillTaskService.EnqueueTaskBatch(taskBatch, _mandrillService);
                 }
+            }
+        }
+        public class ComposeEmailViewModelValidator : AbstractValidator<ComposeEmailViewModel>
+        {
+            public ComposeEmailViewModelValidator()
+            {
+                RuleFor(x => x.Subject).NotEmpty();
+                RuleFor(x => x.FromAddress).NotEmpty().EmailAddress();
+                RuleFor(x => x.FromName).NotEmpty();
+                RuleFor(x => x.MergeTags).NotEmpty().WithMessage("Please choose a csv");
+                RuleFor(x => x.RecipientAddressesDatatableColumnName).NotEmpty().WithMessage("Please select a column with recipient email addresses");
             }
         }
     }

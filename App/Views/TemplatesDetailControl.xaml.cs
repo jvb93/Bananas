@@ -4,11 +4,13 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Linq;
 using Windows.UI.WindowManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Hosting;
+using FluentValidation.Results;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 
 namespace App.Views
@@ -86,8 +88,19 @@ namespace App.Views
 
             EmailAddressColumnSelector.ItemsSource = headerNames;
 
-            grid.Visibility = Visibility.Visible;
-            EmailAddressColumnSelector.Visibility = Visibility.Visible;
+            if (headerNames.Any())
+            {
+                grid.Visibility = Visibility.Visible;
+                EmailAddressColumnSelector.Visibility = Visibility.Visible;
+                SendButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                grid.Visibility = Visibility.Collapsed;
+                EmailAddressColumnSelector.Visibility = Visibility.Collapsed;
+                SendButton.Visibility = Visibility.Collapsed;
+            }
+             
         }
 
 
@@ -96,8 +109,30 @@ namespace App.Views
             ViewModel.RecipientAddressesDatatableColumnName = e.AddedItems[0].ToString();
         }
 
+        private ValidationResult ValidateViewModel()
+        {
+            var validator = new ComposeEmailViewModel.ComposeEmailViewModelValidator();
+            return validator.Validate(ViewModel);
+        }
+
         private async void SendButton_Click(object sender, RoutedEventArgs e)
         {
+            var validationResult = ValidateViewModel();
+
+            if (!validationResult.IsValid)
+            {
+                var validationErrorDialog = new ContentDialog
+                {
+                    Title = "Validation Error",
+                    Content = validationResult.Errors.First().ErrorMessage,
+                    CloseButtonText = "Cancel",
+                    PrimaryButtonText = "Send"
+                };
+
+                await validationErrorDialog.ShowAsync();
+                return;
+            }
+
             var locationPromptDialog = new ContentDialog
             {
                 Title = "Send Emails?",

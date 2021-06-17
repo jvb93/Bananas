@@ -68,6 +68,7 @@
                             HorizontalAlignment="Stretch"
                             Background="{StaticResource SystemControlBackgroundAccentBrush}"
                             Click="SendButton_Click"
+                            Visibility="Collapsed"
                             Foreground="Black" />
                     </Grid>
 
