@@ -125,8 +125,7 @@ namespace App.Views
                 {
                     Title = "Validation Error",
                     Content = validationResult.Errors.First().ErrorMessage,
-                    CloseButtonText = "Cancel",
-                    PrimaryButtonText = "Send"
+                    CloseButtonText = "Ok",
                 };
 
                 await validationErrorDialog.ShowAsync();
